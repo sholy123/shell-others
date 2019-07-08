@@ -12,3 +12,8 @@
 
 - Init this project.
 - Add some files which i wrote before.
+
+### 2019-06-26
+
+- add top command file
+- add go-goroutine file

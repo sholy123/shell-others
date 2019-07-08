@@ -15,3 +15,33 @@ func main（）{
     <- done
 }
 ```
+
+### 生产者和消费者模型
+
+这是并发编程中最常见的例子，该模式主要是通过平衡生产线程和消费线程的工作能力来提高程序的整体处理数据的速度。简单的说，就是生产者生产一些数据，然后放到成果队列里面，同时消费者从成果队列里面取出这些数据。这样就让生产、消费变成了异步两个过程。当成果队列中没有数据的时候，消费者就进入饥饿等待中，当成果队列中的数据满时，生产者则面临因产品挤压而导致CPU被剥夺下岗的问题。
+
+go语言中实现生产者和消费者模型如下：
+
+```go
+func Producer(factor int,out chan <- int){
+    for i := 0; ;i++{
+        out <- i*factor
+    }
+}
+func Cunsumer(in <- chan int){
+    for v:= range in{
+        fmt.Println(v)
+    }
+}
+func main(){
+    ch := make(chan int, 64) //成果队列
+    go Producer(3, ch)  //生产3的倍数
+    go Producer(5, ch)  // 生产5的倍数
+    go Consumer(ch)     // 消费 生成的队列
+    time.Sleep(6 * time.Second)
+}
+```
+
+### 发布订阅模型
+
+发布订阅（publish-and-subscribe）模型通常被简写为pub/sub模型。在这个模型中，消息生产者成为发布者，而消息订阅者则成为订阅者，生产者和消费者的关系是M:N.在传统生产者和消费者模型中，是将消息发送到一个队列中，而发布订阅模型则是将消息发布给一个主题

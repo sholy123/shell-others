@@ -190,3 +190,47 @@ output:5 5 5 5 5
 ```
 说明：defer中的i是对for循环中的i的引用，到最后，i会加到5，故最后全部打印的值为5.
 如果将i作为参数传入defer的表达式中，在传入最初就会进行求值保存，只是没有执行延迟函数。
+
+### go语言中的值传递和地址传递
+
+```
+func main() {
+    goku := &Saiyan{"Goku", 9000}
+    Super(goku)
+    fmt.Println(goku.Power)
+}
+func Super(s *Saiyan) {
+    s.Power += 10000
+}
+```
+上述代码可以修改goku的值，因为这是一个地址传递，对地址中的内容进行了修改，所以goku的值会有变化。
+
+```
+func main() {
+    goku := &Saiyan{"Goku", 9000}
+    Super(goku)
+    fmt.Println(goku.Power)
+}
+func Super(s *Saiyan) {
+    s = &Saiyan{"Gohan", 1000}
+}
+```
+上述代码并没有修改goku的值，因为这是一个地址的值传递，相当于普通的值传递，只不过现在的值变成了地址，因此并不会有什么改变。
+
+- 总结：很多时候，复制一个指针变量的开销要比一个复杂的结构体的开销要小，毕竟64位操作系统的话，指针的大小只有64位。这样的话，其内存开销其实并不大。
+
+
+### go语言中的接口
+
+```
+type Phone interface {
+    call() string 
+}
+type dog struct{
+    name string
+}
+func main(){
+    phone := Phone(dog{})
+}
+```
+上述定义了一个接口，只要有方法实现了里面的函数，即表示实现了这个接口，将实现该接口的类型复制给该接口，即实现了多态。即表示将dog类型赋值给了该接口。
