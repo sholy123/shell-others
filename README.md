@@ -17,3 +17,8 @@
 
 - add top command file
 - add go-goroutine file
+
+### 2019-07-11
+
+- 中间隔了几天，也不是没有写，只是自己没有更新readme而已。有时候就是忘记了，有时候就是懒了，继续努力吧。
+- 今天更新了wc命令，之前更新的有ssh、pipe、s3cmd、mount等
