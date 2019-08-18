@@ -26,3 +26,5 @@
 
 1. What：构建镜像的构建文件，由一系列命令构成的脚本
 2. 构建过程从上到下依次构建，逐条指令对容器进行修改
+
+docker run -it -v /home/appuser/sholy/docker-dis:/home  docker-registry.saicstack.com/ai-dlaas/python3-distortion:v6.6 bash 
